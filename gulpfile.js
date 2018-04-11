@@ -19,7 +19,7 @@ var gulp = require('gulp'),
 
 // Styles
 gulp.task('styles', function() {
-  return sass('app/sass/**/*.scss', { style: 'expanded' })
+  return sass('app/sass/**/*.scss', { style: 'compact' })
 
     .pipe(autoprefixer({
             browsers: ['last 2 versions'],
@@ -27,10 +27,10 @@ gulp.task('styles', function() {
             cascade: false
         }))
      .pipe(concat('style.css'))
-  .pipe(sourcemaps.init())
+  .pipe(sourcemaps.init({ loadMaps: true }))
   //  .pipe(identityMap()) // .js and .css files will get a generated sourcemap
     
-  .pipe(sourcemaps.write())
+  .pipe(sourcemaps.write({ includeContent: false }))
 
     .pipe(gulp.dest('./'))
     .pipe(rename({ suffix: '.min' }))
